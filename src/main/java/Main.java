@@ -22,16 +22,14 @@ class Main {
             bw.write(Arrays.toString(board[i]));
             bw.write(lineSeparator);
         }
-
-        br.close();
-        bw.flush();
-        bw.close();
     }
 
     public static void main(String[] args) throws IOException {
-        main(
-                new BufferedReader(new InputStreamReader(System.in)),
-                new BufferedWriter(new OutputStreamWriter(System.out))
-        );
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        main(br, bw);
+        br.close();
+        bw.flush();
+        bw.close();
     }
 }
