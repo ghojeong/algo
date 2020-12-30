@@ -1,17 +1,31 @@
 package baekjoon.ant;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+// https://www.acmicpc.net/problem/3048
 public class Main {
-    static String lineSeparator = System.lineSeparator();
+    static class Ant {
+        final char ch;
+        final boolean isLeft;
 
-    static void swap(char[] output, int i, int j) {
-        char temp = output[i];
-        output[i] = output[j];
-        output[j] = temp;
+        Ant(char ch, boolean isLeft) {
+            this.ch = ch;
+            this.isLeft = isLeft;
+        }
+    }
+
+    static void main(List<Ant> ants, int times) {
+        while (times-- > 0) {
+            for (int i = 0; i < ants.size() - 1; i++) {
+                if (ants.get(i).isLeft == true &&
+                        ants.get(i + 1).isLeft == false) {
+                    Collections.swap(ants, i, ++i);
+                }
+            }
+        }
     }
 
     static void main(BufferedReader br, BufferedWriter bw) throws IOException {
@@ -19,15 +33,24 @@ public class Main {
         int m = Integer.parseInt(st.nextToken());
         int n = Integer.parseInt(st.nextToken());
 
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(br.readLine());
-        String left = buffer.reverse().toString();
-        char[] output = (left + br.readLine()).toCharArray();
+        List<Ant> leftAnts = br.readLine().chars()
+                .mapToObj(ch -> new Ant((char) ch, true))
+                .collect(Collectors.toList());
+        Collections.reverse(leftAnts);
+
+        List<Ant> rightAnts = br.readLine().chars()
+                .mapToObj(ch -> new Ant((char) ch, false))
+                .collect(Collectors.toList());
         int times = Integer.parseInt(br.readLine());
 
-        swap(output, m, m - 1);
+        List<Ant> ants = Stream.concat(leftAnts.stream(), rightAnts.stream())
+                .collect(Collectors.toList());
 
-        bw.write(String.valueOf(output));
+        main(ants, times);
+
+        StringBuilder sb = new StringBuilder();
+        ants.forEach(ant -> sb.append(ant.ch));
+        bw.write(sb.toString());
     }
 
     public static void main(String[] args) throws IOException {
