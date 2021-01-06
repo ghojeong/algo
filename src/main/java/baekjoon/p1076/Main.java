@@ -1,4 +1,4 @@
-package baekjoon.p1000;
+package baekjoon.p1076;
 // https://www.acmicpc.net/problem/1000
 
 import java.io.*;
@@ -34,7 +34,6 @@ class Main {
             return;
         }
         System.out.println("input: " + input);
-        System.out.println("actual: " + output);
         System.out.println("expected: " + expected);
     }
 

@@ -1,5 +1,5 @@
-package baekjoon.p1000;
-// https://www.acmicpc.net/problem/1000
+package baekjoon.p1009;
+// https://www.acmicpc.net/problem/1009
 
 import java.io.*;
 import java.util.*;
@@ -23,7 +23,15 @@ class Main {
     }
 
     private static String solve(Dto input) {
-        return Integer.toString(input.a + input.b);
+        int solution = 1;
+        for (int i = 0; i < input.b; i++) {
+            solution *= input.a;
+            solution %= 10;
+        }
+        if (solution == 0) {
+            solution = 10;
+        }
+        return Integer.toString(solution);
     }
 
     private static void assertOutputEquals(String expected, Dto input) {
@@ -39,21 +47,27 @@ class Main {
     }
 
     private static void test() {
-        assertOutputEquals("3", new Dto(1, 2));
-        assertOutputEquals("12", new Dto(5, 7));
+        assertOutputEquals("1", new Dto(1, 6));
+        assertOutputEquals("7", new Dto(3, 7));
+        assertOutputEquals("6", new Dto(6, 2));
+        assertOutputEquals("1", new Dto(7, 100));
+        assertOutputEquals("9", new Dto(9, 635));
+        assertOutputEquals("10", new Dto(10, 100));
     }
 
     private static void main() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int a = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
-        Dto input = new Dto(a, b);
-
-        String output = solve(input);
-        bw.write(output);
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            Dto input = new Dto(a, b);
+            String output = solve(input);
+            bw.write(output + lineSeparator);
+        }
 
         br.close();
         bw.flush();
