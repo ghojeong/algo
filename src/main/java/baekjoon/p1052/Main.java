@@ -8,39 +8,84 @@ class Main {
     private static final String lineSeparator = System.lineSeparator();
 
     private static class Dto {
-        final int a;
-        final int b;
+        final int n;
+        final int k;
 
-        Dto(int a, int b) {
-            this.a = a;
-            this.b = b;
+        Dto(int n, int k) {
+            this.n = n;
+            this.k = k;
         }
 
         @Override
         public String toString() {
-            return "a=" + a + ", b=" + b;
+            return "n=" + n + ", k=" + k;
         }
+    }
+
+    private static int countBits(int decimal) {
+        int count = 0;
+        while (decimal > 0) {
+            count += decimal & 1;
+            decimal >>= 1;
+        }
+        return count;
     }
 
     private static String solve(Dto input) {
-        return Integer.toString(input.a + input.b);
+        int n = input.n;
+        int countOfBits = countBits(n);
+        while (countOfBits > input.k) {
+            countOfBits = countBits(++n);
+        }
+        int numOfBottles = n - input.n;
+        return Integer.toString(numOfBottles);
     }
 
-    private static void assertOutputEquals(String expected, Dto input) {
-        String output = solve(input);
-        System.out.println(lineSeparator);
-        if (expected.equals(output)) {
-            System.out.println("!Success!");
+    private static void assertCountBits(int expected, int input) {
+        int actual = countBits(input);
+        if (expected == actual) {
+            System.out.print("  !countBits success!  ");
             return;
         }
+        System.out.println(lineSeparator);
         System.out.println("input: " + input);
-        System.out.println("actual: " + output);
+        System.out.println("actual: " + actual);
         System.out.println("expected: " + expected);
     }
 
+    private static void assertSolve(String expected, Dto input) {
+        String actual = solve(input);
+        if (expected.equals(actual)) {
+            System.out.print("  !solve success!  ");
+            return;
+        }
+        System.out.println(lineSeparator);
+        System.out.println("input: " + input);
+        System.out.println("actual: " + actual);
+        System.out.println("expected: " + expected);
+    }
+
+    private static void testCountBits() {
+        assertCountBits(0, 0);
+        assertCountBits(1, 1);
+        assertCountBits(1, 2);
+        assertCountBits(2, 3);
+        assertCountBits(1, 4);
+        assertCountBits(2, 5);
+        assertCountBits(2, 6);
+        assertCountBits(3, 7);
+        assertCountBits(1, 8);
+        assertCountBits(4, 15);
+        assertCountBits(1, 16);
+    }
+
+    private static void testSolve() {
+        assertSolve("1", new Dto(3, 1));
+    }
+
     private static void test() {
-        assertOutputEquals("3", new Dto(1, 2));
-        assertOutputEquals("12", new Dto(5, 7));
+        testCountBits();
+        testSolve();
     }
 
     private static void main() throws IOException {
@@ -48,9 +93,9 @@ class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int a = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
-        Dto input = new Dto(a, b);
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        Dto input = new Dto(n, k);
 
         String output = solve(input);
         bw.write(output);
