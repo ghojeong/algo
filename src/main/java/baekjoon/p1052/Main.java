@@ -1,5 +1,5 @@
 package baekjoon.p1052;
-// https://www.acmicpc.net/problem/1000
+// https://www.acmicpc.net/problem/1052
 
 import java.io.*;
 import java.util.*;
@@ -34,6 +34,7 @@ class Main {
             return;
         }
         System.out.println("input: " + input);
+        System.out.println("actual: " + output);
         System.out.println("expected: " + expected);
     }
 
