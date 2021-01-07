@@ -7,11 +7,11 @@ import java.util.*;
 class Main {
     private static final String lineSeparator = System.lineSeparator();
 
-    private static class Dto {
+    private static class InputDto {
         final int a;
         final int b;
 
-        Dto(int a, int b) {
+        InputDto(int a, int b) {
             this.a = a;
             this.b = b;
         }
@@ -22,25 +22,29 @@ class Main {
         }
     }
 
-    private static String solve(Dto input) {
+    private static String solve(InputDto input) {
         return Integer.toString(input.a + input.b);
     }
 
-    private static void assertOutputEquals(String expected, Dto input) {
-        String output = solve(input);
+    private static void printFail(Object input, Object actual, Object expected) {
         System.out.println(lineSeparator);
-        if (expected.equals(output)) {
-            System.out.println("!Success!");
-            return;
-        }
         System.out.println("input: " + input);
-        System.out.println("actual: " + output);
+        System.out.println("actual: " + actual);
         System.out.println("expected: " + expected);
     }
 
+    private static void assertSolve(String expected, InputDto input) {
+        String actual = solve(input);
+        if (expected.equals(actual)) {
+            System.out.print("  !solve Success!  ");
+            return;
+        }
+        printFail(input, actual, expected);
+    }
+
     private static void test() {
-        assertOutputEquals("3", new Dto(1, 2));
-        assertOutputEquals("12", new Dto(5, 7));
+        assertSolve("3", new InputDto(1, 2));
+        assertSolve("12", new InputDto(5, 7));
     }
 
     private static void main() throws IOException {
@@ -50,7 +54,7 @@ class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
-        Dto input = new Dto(a, b);
+        InputDto input = new InputDto(a, b);
 
         String output = solve(input);
         bw.write(output);
