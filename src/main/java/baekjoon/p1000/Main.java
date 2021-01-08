@@ -27,16 +27,15 @@ class Main {
     }
 
     private static void printFail(Object input, Object actual, Object expected) {
-        System.out.println(lineSeparator);
-        System.out.println("input: " + input);
-        System.out.println("actual: " + actual);
-        System.out.println("expected: " + expected);
+        System.err.println(lineSeparator);
+        System.err.println("input: " + input);
+        System.err.println("actual: " + actual);
+        System.err.println("expected: " + expected);
     }
 
     private static void assertSolve(String expected, InputDto input) {
         String actual = solve(input);
         if (expected.equals(actual)) {
-            System.out.print("  !solve Success!  ");
             return;
         }
         printFail(input, actual, expected);
@@ -65,7 +64,7 @@ class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        // test();
+        test();
         main();
     }
 }
