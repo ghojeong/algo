@@ -2,8 +2,8 @@ package leet.remove_duplicates_from_sorted_list;
 
 
 class ListNode {
-    private int val;
-    private ListNode next;
+    int val;
+    ListNode next;
 
     ListNode() {}
 

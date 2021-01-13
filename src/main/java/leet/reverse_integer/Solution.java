@@ -1,12 +1,10 @@
 package leet.reverse_integer;
 
-/**
- * https://leetcode.com/problems/reverse-integer/submissions/
- */
+// https://leetcode.com/problems/reverse-integer/submissions/
 
 public class Solution {
     public int reverse(int x) {
-        char[] arr = Integer.toString(x).toCharArray();
+        char[] arr = String.valueOf(x).toCharArray();
         boolean isNegative = arr[0] == '-';
         int index = arr.length - 1;
 
