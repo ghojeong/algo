@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * https://jason9319.tistory.com/141
- * Manber-Myers Algorithm
+ * Suffix Array
  */
 
 /**
