@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Sum 과 관련된 문제의 핵심 아이디어
- * 1. 정렬하려 한다.
+ * 1. 정렬한다.
  * 2. HashMap 을 활용한다. (선택할 숫자가 1개만 남으면 hashmap 으로 연결한다.)
  * 관련문제: https://leetcode.com/problems/3sum
  */
