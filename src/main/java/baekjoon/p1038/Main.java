@@ -40,7 +40,7 @@ class Main {
     }
 
 
-    private static void prlongFail(Object input, Object actual, Object expected) {
+    private static void printFail(Object input, Object actual, Object expected) {
         System.err.println(System.lineSeparator());
         System.err.println("input: " + input);
         System.err.println("actual: " + actual);
@@ -52,7 +52,7 @@ class Main {
         if (expected == actual) {
             return;
         }
-        prlongFail(input, actual, expected);
+        printFail(input, actual, expected);
     }
 
     private static void assertSolve(int input, String expected) {
@@ -60,7 +60,7 @@ class Main {
         if (expected.equals(actual)) {
             return;
         }
-        prlongFail(input, actual, expected);
+        printFail(input, actual, expected);
     }
 
     private static void testIsDecreasing() {
